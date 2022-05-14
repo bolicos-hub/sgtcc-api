@@ -12,6 +12,7 @@ plugins {
 group = "io.notbronken"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 configurations {
 	compileOnly {
@@ -20,8 +21,8 @@ configurations {
 }
 
 repositories {
-	maven { url = uri("https://repo.spring.io/milestone") }
 	mavenCentral()
+	maven { url = uri("https://repo.spring.io/milestone") }
 	maven { url = uri("https://repo.spring.io/snapshot") }
 }
 
@@ -73,11 +74,14 @@ tasks.withType<Test> {
 }
 
 tasks.test {
-	outputs.dir(snippetsDir)
+	project.property("snippetsDir")?.let {
+		outputs.dir(it)
+	}
 }
 
 tasks.asciidoctor {
-	inputs.dir(snippetsDir)
-//	inputs.dir("${property("snippetsDir")}")
-	dependsOn(test)
+	project.property("snippetsDir")?.let {
+		inputs.dir(it)
+	}
+	dependsOn(tasks.test)
 }
