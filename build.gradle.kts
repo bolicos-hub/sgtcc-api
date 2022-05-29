@@ -93,3 +93,7 @@ tasks.asciidoctor {
 	}
 	dependsOn(tasks.test)
 }
+
+tasks.jar {
+	enabled = false
+}
