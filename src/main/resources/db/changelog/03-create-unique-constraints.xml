@@ -1,0 +1,22 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+    "
+>
+<changeSet author="analuciabolico" id="03-create-unique-constraints">
+    <addUniqueConstraint tableName="TEACHERS" columnNames="registration,email,phone,cpf" />
+    <addUniqueConstraint tableName="STUDENTS" columnNames="registration,email,phone,cpf" />
+    <addUniqueConstraint tableName="SEMESTERS" columnNames="id" />
+    <addUniqueConstraint tableName="CLASSES" columnNames="id" />
+    <addUniqueConstraint tableName="SUGGESTIONS" columnNames="id" />
+    <addUniqueConstraint tableName="INTEREST_AREAS" columnNames="id" />
+    <addUniqueConstraint tableName="PROPOSALS" columnNames="id" />
+    <addUniqueConstraint tableName="EXAMINATIONS" columnNames="id" />
+    <addUniqueConstraint tableName="BOARDS" columnNames="id,FK_PROPOSAL_PK" />
+    <addUniqueConstraint tableName="DOCUMENTS" columnNames="FILE_PATH" />
+</changeSet>
+
+</databaseChangeLog>

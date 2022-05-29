@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    "
+>
+
+<include file="01-create-sequences.xml" relativeToChangelogFile="true"/>
+<include file="02-create-tables.xml" relativeToChangelogFile="true"/>
+<include file="03-create-unique-constraints.xml" relativeToChangelogFile="true"/>
+<include file="04-create-not-null-constraints.xml" relativeToChangelogFile="true"/>
+<include file="05-create-primary-keys.xml" relativeToChangelogFile="true"/>
+<include file="06-create-foreign-keys.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

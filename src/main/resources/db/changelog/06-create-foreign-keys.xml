@@ -1,0 +1,94 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+    "
+>
+<changeSet author="analuciabolico" id="06-create-foreign-keys">
+    <addForeignKeyConstraint baseTableName="CLASSES" baseColumnNames="FK_SEMESTER_PK"
+            constraintName="FK_CLASSES_CONSTRAINT_PK_SEMESTERS"
+            referencedTableName="SEMESTERS"
+            referencedColumnNames="id"
+    />
+    <addForeignKeyConstraint baseTableName="CLASSES" baseColumnNames="FK_TEACHER_PK"
+            constraintName="FK_CLASSES_CONSTRAINT_PK_TEACHERS"
+            referencedTableName="TEACHERS"
+            referencedColumnNames="registration"
+    />
+    <addForeignKeyConstraint baseTableName="SUGGESTIONS" baseColumnNames="FK_TEACHER_PK"
+             constraintName="FK_SUGGESTIONS_CONSTRAINT_PK_TEACHERS"
+             referencedTableName="TEACHERS"
+             referencedColumnNames="registration"
+    />
+    <addForeignKeyConstraint baseTableName="PROPOSALS" baseColumnNames="FK_TEACHER_PK"
+            constraintName="FK_PROPOSALS_CONSTRAINT_PK_TEACHERS"
+            referencedTableName="TEACHERS"
+            referencedColumnNames="registration"
+    />
+    <addForeignKeyConstraint baseTableName="PROPOSALS" baseColumnNames="FK_STUDENT_PK"
+             constraintName="FK_PROPOSALS_CONSTRAINT_PK_STUDENTS"
+             referencedTableName="STUDENTS"
+             referencedColumnNames="registration"
+    />
+    <addForeignKeyConstraint baseTableName="DOCUMENTS" baseColumnNames="FK_PROPOSAL_PK"
+             constraintName="FK_DOCUMENTS_CONSTRAINT_PK_PROPOSALS"
+             referencedTableName="PROPOSALS"
+             referencedColumnNames="id"
+    />
+    <addForeignKeyConstraint baseTableName="EXAMINATIONS" baseColumnNames="FK_PROPOSAL_PK"
+             constraintName="FK_EXAMINATIONS_CONSTRAINT_PK_PROPOSALS"
+             referencedTableName="PROPOSALS"
+             referencedColumnNames="id"
+    />
+    <addForeignKeyConstraint baseTableName="EXAMINATIONS" baseColumnNames="FK_TEACHER_PK"
+             constraintName="FK_EXAMINATIONS_CONSTRAINT_PK_TEACHERS"
+             referencedTableName="TEACHERS"
+             referencedColumnNames="registration"
+    />
+    <addForeignKeyConstraint baseTableName="BOARDS" baseColumnNames="FK_PROPOSAL_PK"
+             constraintName="FK_BOARDS_CONSTRAINT_PK_PROPOSALS"
+             referencedTableName="PROPOSALS"
+             referencedColumnNames="id"
+    />
+
+    <!--    Associative Tables-->
+    <addForeignKeyConstraint baseTableName="CLASSES_STUDENTS" baseColumnNames="FK_CLASS_PK"
+             constraintName="FK_CLASSES_STUDENTS_CONSTRAINT_PK_CLASSES"
+             referencedTableName="CLASSES"
+             referencedColumnNames="id"
+    />
+    <addForeignKeyConstraint baseTableName="CLASSES_STUDENTS" baseColumnNames="FK_STUDENT_PK"
+             constraintName="FK_CLASSES_STUDENTS_CONSTRAINT_PK_STUDENTS"
+             referencedTableName="STUDENTS"
+             referencedColumnNames="registration"
+    />
+    <addForeignKeyConstraint baseTableName="CLASSES_STUDENTS" baseColumnNames="FK_PROPOSAL_PK"
+             constraintName="FK_CLASSES_STUDENTS_CONSTRAINT_PK_PROPOSALS"
+             referencedTableName="PROPOSALS"
+             referencedColumnNames="id"
+    />
+    <addForeignKeyConstraint baseTableName="TEACHERS_BOARDS" baseColumnNames="FK_TEACHER_PK"
+             constraintName="FK_TEACHERS_BOARDS_CONSTRAINT_PK_TEACHERS"
+             referencedTableName="TEACHERS"
+             referencedColumnNames="registration"
+    />
+    <addForeignKeyConstraint baseTableName="TEACHERS_BOARDS" baseColumnNames="FK_BOARD_PK"
+             constraintName="FK_TEACHERS_BOARDS_CONSTRAINT_PK_BOARDS"
+             referencedTableName="BOARDS"
+             referencedColumnNames="id"
+    />
+    <addForeignKeyConstraint baseTableName="TEACHERS_INTEREST_AREAS" baseColumnNames="FK_TEACHER_PK"
+             constraintName="FK_TEACHERS_INTEREST_AREAS_CONSTRAINT_PK_TEACHERS"
+             referencedTableName="TEACHERS"
+             referencedColumnNames="registration"
+    />
+    <addForeignKeyConstraint baseTableName="TEACHERS_INTEREST_AREAS" baseColumnNames="FK_INTEREST_AREA_PK"
+             constraintName="FK_TEACHERS_INTEREST_AREAS_CONSTRAINT_PK_INTEREST_AREAS"
+             referencedTableName="INTEREST_AREAS"
+             referencedColumnNames="id"
+    />
+</changeSet>
+
+</databaseChangeLog>

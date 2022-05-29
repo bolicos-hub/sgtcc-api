@@ -1,0 +1,95 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+    "
+>
+
+<changeSet author="analuciabolico" id="04-create-not-null-constraints">
+    <addNotNullConstraint tableName="TEACHERS" columnName="registration" />
+    <addNotNullConstraint tableName="TEACHERS" columnName="name" />
+    <addNotNullConstraint tableName="TEACHERS" columnName="email" />
+    <addNotNullConstraint tableName="TEACHERS" columnName="phone" />
+    <addNotNullConstraint tableName="TEACHERS" columnName="cpf" />
+    <addNotNullConstraint tableName="TEACHERS" columnName="lattes" />
+    <addNotNullConstraint tableName="TEACHERS" columnName="CREATED_AT" />
+
+    <addNotNullConstraint tableName="STUDENTS" columnName="registration" />
+    <addNotNullConstraint tableName="STUDENTS" columnName="name" />
+    <addNotNullConstraint tableName="STUDENTS" columnName="email" />
+    <addNotNullConstraint tableName="STUDENTS" columnName="phone" />
+    <addNotNullConstraint tableName="STUDENTS" columnName="cpf" />
+    <addNotNullConstraint tableName="STUDENTS" columnName="status" />
+    <addNotNullConstraint tableName="STUDENTS" columnName="CREATED_AT" />
+
+    <addNotNullConstraint tableName="SEMESTERS" columnName="id"/>
+    <addNotNullConstraint tableName="SEMESTERS" columnName="name"/>
+    <addNotNullConstraint tableName="SEMESTERS" columnName="CREATED_AT"/>
+
+    <addNotNullConstraint tableName="CLASSES" columnName="id"/>
+    <addNotNullConstraint tableName="CLASSES" columnName="name"/>
+    <addNotNullConstraint tableName="CLASSES" columnName="CREATED_AT"/>
+    <addNotNullConstraint tableName="CLASSES" columnName="FK_TEACHER_PK"/>
+    <addNotNullConstraint tableName="CLASSES" columnName="FK_SEMESTER_PK"/>
+
+    <addNotNullConstraint tableName="SUGGESTIONS" columnName="id"/>
+    <addNotNullConstraint tableName="SUGGESTIONS" columnName="title"/>
+    <addNotNullConstraint tableName="SUGGESTIONS" columnName="description"/>
+    <addNotNullConstraint tableName="SUGGESTIONS" columnName="search"/>
+    <addNotNullConstraint tableName="SUGGESTIONS" columnName="status"/>
+    <addNotNullConstraint tableName="SUGGESTIONS" columnName="CREATED_AT"/>
+    <addNotNullConstraint tableName="SUGGESTIONS" columnName="FK_TEACHER_PK"/>
+
+    <addNotNullConstraint tableName="INTEREST_AREAS" columnName="id"/>
+    <addNotNullConstraint tableName="INTEREST_AREAS" columnName="name"/>
+    <addNotNullConstraint tableName="INTEREST_AREAS" columnName="description"/>
+    <addNotNullConstraint tableName="INTEREST_AREAS" columnName="CREATED_AT"/>
+
+    <addNotNullConstraint tableName="PROPOSALS" columnName="id"/>
+    <addNotNullConstraint tableName="PROPOSALS" columnName="title"/>
+    <addNotNullConstraint tableName="PROPOSALS" columnName="description"/>
+    <addNotNullConstraint tableName="PROPOSALS" columnName="status"/>
+    <addNotNullConstraint tableName="PROPOSALS" columnName="CREATED_AT"/>
+    <addNotNullConstraint tableName="PROPOSALS" columnName="FK_TEACHER_PK"/>
+    <addNotNullConstraint tableName="PROPOSALS" columnName="FK_STUDENT_PK"/>
+
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="id"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="CREATED_AT"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="type"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="note"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="title"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="presentation"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="TEXT_CONTENT"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="TEXT_STRUCTURE"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="language"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="observation"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="relevance"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="FK_PROPOSAL_PK"/>
+    <addNotNullConstraint tableName="EXAMINATIONS" columnName="FK_TEACHER_PK"/>
+
+    <addNotNullConstraint tableName="BOARDS" columnName="id"/>
+    <addNotNullConstraint tableName="BOARDS" columnName="CREATED_AT"/>
+    <addNotNullConstraint tableName="BOARDS" columnName="FK_PROPOSAL_PK"/>
+
+    <addNotNullConstraint tableName="DOCUMENTS" columnName="FILE_PATH"/>
+    <addNotNullConstraint tableName="DOCUMENTS" columnName="name"/>
+    <addNotNullConstraint tableName="DOCUMENTS" columnName="CREATED_AT"/>
+    <addNotNullConstraint tableName="DOCUMENTS" columnName="FK_PROPOSAL_PK"/>
+
+
+    <!--    Associative Tables-->
+    <addNotNullConstraint tableName="CLASSES_STUDENTS" columnName="FK_CLASS_PK"/>
+    <addNotNullConstraint tableName="CLASSES_STUDENTS" columnName="FK_STUDENT_PK"/>
+    <addNotNullConstraint tableName="CLASSES_STUDENTS" columnName="note"/>
+    <addNotNullConstraint tableName="CLASSES_STUDENTS" columnName="FK_PROPOSAL_PK"/>
+
+    <addNotNullConstraint tableName="TEACHERS_BOARDS" columnName="FK_TEACHER_PK"/>
+    <addNotNullConstraint tableName="TEACHERS_BOARDS" columnName="FK_BOARD_PK"/>
+
+    <addNotNullConstraint tableName="TEACHERS_INTEREST_AREAS" columnName="FK_TEACHER_PK"/>
+    <addNotNullConstraint tableName="TEACHERS_INTEREST_AREAS" columnName="FK_INTEREST_AREA_PK"/>
+</changeSet>
+
+</databaseChangeLog>
