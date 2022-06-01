@@ -16,7 +16,6 @@ java.targetCompatibility = JavaVersion.VERSION_17
 
 extra["snippetsDir"] = file("build/generated-snippets")
 val springCloudVersion = "2022.0.0-M2"
-val snakeyamlVersion = "1.30"
 
 configurations {
 	compileOnly {

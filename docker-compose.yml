@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db-postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "sgtcc-api"
+    ports:
+      - "15432:5432"
+    volumes:
+      - /home/analucia/docker/volumes/postgres/database:/var/lib/postgresql/data
+    networks:
+      - db-postgres-network
+
+  db-pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin"
+      PGADMIN_DEFAULT_PASSWORD: "sgtcc-api"
+    ports:
+      - "16543:80"
+    depends_on:
+      - db-postgres
+    networks:
+      - db-postgres-network
+
+networks:
+  db-postgres-network:
+    driver: bridge
