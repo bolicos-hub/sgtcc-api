@@ -32,9 +32,7 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-hateoas") {
-		exclude(group = "org.springframework.boot", module = "spring-boot-starter-web")
-	}
+	implementation("org.springframework.boot:spring-boot-starter-hateoas")
 	implementation("org.springframework.boot:spring-boot-starter-jooq")
 //	implementation("org.springframework.boot:spring-boot-starter-mail")
 //	implementation("org.springframework.boot:spring-boot-starter-quartz")
@@ -57,6 +55,10 @@ dependencies {
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
 }
+configurations.all {
+	exclude(module = "spring-boot-starter-web")
+}
+
 
 //dependencyManagement {
 //	imports {
