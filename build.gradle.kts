@@ -15,7 +15,7 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 java.targetCompatibility = JavaVersion.VERSION_17
 
 extra["snippetsDir"] = file("build/generated-snippets")
-val springCloudVersion = "2022.0.0-M2"
+//val springCloudVersion = "2022.0.0-M2"
 
 configurations {
 	compileOnly {
@@ -58,11 +58,11 @@ dependencies {
 	testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
 }
 
-dependencyManagement {
-	imports {
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
-	}
-}
+//dependencyManagement {
+//	imports {
+//		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+//	}
+//}
 
 noArg {
 	annotation("jakarta.persistence.Entity")
