@@ -2,6 +2,7 @@ package io.notbronken.sgtccapi.students.infra.entity
 
 import io.notbronken.sgtccapi.proposals.infra.entity.Proposal
 import io.notbronken.sgtccapi.semesters.infra.entity.Grade
+import io.notbronken.sgtccapi.students.api.dto.ListDto
 import io.notbronken.sgtccapi.students.infra.enumeration.StudentStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -34,6 +35,15 @@ class Student(
     val proposals: Set<Proposal> = setOf(),
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val status: StudentStatus,
+    val status: StudentStatus = StudentStatus.ACTIVE,
 ) {
+    fun toDto() = ListDto(
+        registration = registration,
+        name = name,
+        email = email,
+        phone = phone,
+        cpf = cpf,
+        status = status,
+        createdAt = createdAt,
+    )
 }

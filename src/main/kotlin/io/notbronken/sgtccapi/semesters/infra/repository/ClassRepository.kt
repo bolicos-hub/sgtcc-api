@@ -1,7 +1,7 @@
 package io.notbronken.sgtccapi.semesters.infra.repository
 
-import io.notbronken.sgtccapi.boards.infra.entity.Board
 import org.springframework.data.jpa.repository.JpaRepository
+import io.notbronken.sgtccapi.semesters.infra.entity.Class as Group
 
-interface ClassRepository: JpaRepository<Board, Long> {
+interface ClassRepository: JpaRepository<Group, Long> {
 }

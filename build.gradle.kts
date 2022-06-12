@@ -15,6 +15,7 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 java.targetCompatibility = JavaVersion.VERSION_17
 
 extra["snippetsDir"] = file("build/generated-snippets")
+val openApiVersion = "1.6.9"
 //val springCloudVersion = "2022.0.0-M2"
 
 configurations {
@@ -30,6 +31,8 @@ repositories {
 }
 
 dependencies {
+
+	/* Spring Boot */
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-hateoas")
@@ -38,19 +41,42 @@ dependencies {
 //	implementation("org.springframework.boot:spring-boot-starter-quartz")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
+	/* Open API */
+	implementation("org.springdoc:springdoc-openapi-webflux-ui:${openApiVersion}")
+	implementation("org.springdoc:springdoc-openapi-data-rest:${openApiVersion}")
+	implementation("org.springdoc:springdoc-openapi-kotlin:${openApiVersion}")
+	implementation("org.springdoc:springdoc-openapi-security:${openApiVersion}")
+
+	/* Jackson Serialization for Kotlin */
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+	/* Kotlin Reactor and Coroutines */
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
+
+	/* Liquibase Migrations */
 	implementation("org.liquibase:liquibase-core")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+	/* Databases = H2 e Postgres */
 	runtimeOnly("com.h2database:h2")
+	runtimeOnly("org.postgresql:postgresql")
+
 //	runtimeOnly("io.micrometer:micrometer-registry-new-relic")
 //	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
-	runtimeOnly("org.postgresql:postgresql")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+	/* Tests */
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
 }
