@@ -1,12 +1,10 @@
 package io.notbronken.sgtccapi.config
 
-import io.swagger.v3.core.converter.ModelConverters
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Contact
 import io.swagger.v3.oas.models.info.Info
 import org.springdoc.core.GroupedOpenApi
 import org.springdoc.core.providers.ObjectMapperProvider
-import org.springdoc.webflux.core.converters.WebFluxSupportConverter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -23,12 +21,8 @@ class SwaggerConfiguration {
 
     @Bean
     fun configOpenAPI(mapper: ObjectMapperProvider): OpenAPI? {
-//        ModelConverters
-//            .getInstance()
-//            .addConverter(WebFluxSupportConverter(mapper))
-
-        return OpenAPI()
-            .info(getApiInfo())
+        val info = getApiInfo()
+        return OpenAPI().info(info)
     }
 
     private fun getApiInfo(): Info {
