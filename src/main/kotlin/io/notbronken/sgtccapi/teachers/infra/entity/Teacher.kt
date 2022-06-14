@@ -3,14 +3,14 @@ package io.notbronken.sgtccapi.teachers.infra.entity
 import io.notbronken.sgtccapi.boards.infra.entity.Board
 import io.notbronken.sgtccapi.proposals.infra.entity.Examination
 import io.notbronken.sgtccapi.proposals.infra.entity.Proposal
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.JoinTable
-import jakarta.persistence.ManyToMany
-import jakarta.persistence.OneToMany
-import jakarta.persistence.Table
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.ManyToMany
+import javax.persistence.OneToMany
+import javax.persistence.Table
 import java.time.ZonedDateTime
 import io.notbronken.sgtccapi.semesters.infra.entity.Class as Group
 

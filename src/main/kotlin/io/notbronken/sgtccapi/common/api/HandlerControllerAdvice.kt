@@ -6,9 +6,15 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.server.ResponseStatusException
+import org.springframework.web.server.ServerWebExchange
 
 @ControllerAdvice
 class HandlerControllerAdvice {
+    companion object {
+        const val defaultMessage = "Internal Server Error"
+        val status = HttpStatus.INTERNAL_SERVER_ERROR
+    }
 
     fun factoryErrorMessage(status: HttpStatus, message: String) = ErrorMessageModel(status.value(), message)
 
@@ -32,8 +38,13 @@ class HandlerControllerAdvice {
         return ResponseEntity(errorMessage, status)
     }
 
-    companion object {
-        const val defaultMessage = "Internal Server Error"
-        val status = HttpStatus.INTERNAL_SERVER_ERROR
-    }
+//    @ExceptionHandler(ResponseStatusException::class)
+//    fun handleResponseStatusException(
+//        exception: BusinessException,
+//        server: ServerWebExchange
+//    ): ResponseEntity<ErrorMessageModel> {
+//        val status = server.response.statusCode ?: HttpStatus.NOT_FOUND
+//        val errorMessage = ErrorMessageModel(status.value(), exception.message)
+//        return ResponseEntity(errorMessage, status)
+//    }
 }

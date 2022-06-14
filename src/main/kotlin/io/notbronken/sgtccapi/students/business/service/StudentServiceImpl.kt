@@ -8,24 +8,33 @@ import io.notbronken.sgtccapi.students.infra.entity.Student
 import io.notbronken.sgtccapi.students.infra.repository.StudentRepository
 import kotlinx.coroutines.runBlocking
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+import java.util.logging.Logger
 
 @Service
 class StudentServiceImpl(
     private val studentRepository: StudentRepository,
 ): StudentService {
-    override suspend fun create(dto: CreateDto): CreatedResourceWithId {
-        val entity: Student = dto.toEntity()
-        val response = runBlocking { studentRepository.save(entity) }
-        return CreatedResourceWithId(id = response.registration)
+    companion object {
+        private val LOGGER = Logger.getLogger(this::class.simpleName)
     }
 
-    override suspend fun delete(): DeletedResource {
+    override fun create(dto: CreateDto): Mono<CreatedResourceWithId> {
+        val entity: Student = dto.toEntity()
+        val response = runBlocking { studentRepository.save(entity) }
+        val created = CreatedResourceWithId(id = response.registration)
+        return Mono.just(created)
+    }
+
+    override fun delete(): Mono<DeletedResource> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun list(): List<ListDto> {
-        val list = studentRepository.findAll()
-        return list.map(Student::toDto)
+    override fun list(): Flux<List<ListDto>> {
+        val list = runBlocking { studentRepository.findAll() }
+        val converted = list.map(Student::toDto)
+        return Flux.just(converted)
     }
 
 }

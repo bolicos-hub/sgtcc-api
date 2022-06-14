@@ -4,13 +4,13 @@ import io.notbronken.sgtccapi.proposals.infra.entity.Proposal
 import io.notbronken.sgtccapi.semesters.infra.entity.Grade
 import io.notbronken.sgtccapi.students.api.dto.ListDto
 import io.notbronken.sgtccapi.students.infra.enumeration.StudentStatus
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
-import jakarta.persistence.Table
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.Table
 import java.time.ZonedDateTime
 
 @Entity

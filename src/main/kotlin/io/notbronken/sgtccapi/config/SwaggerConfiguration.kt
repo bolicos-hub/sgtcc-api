@@ -4,7 +4,6 @@ import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Contact
 import io.swagger.v3.oas.models.info.Info
 import org.springdoc.core.GroupedOpenApi
-import org.springdoc.core.providers.ObjectMapperProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -20,7 +19,7 @@ class SwaggerConfiguration {
     }
 
     @Bean
-    fun configOpenAPI(mapper: ObjectMapperProvider): OpenAPI? {
+    fun configOpenAPI(): OpenAPI? {
         val info = getApiInfo()
         return OpenAPI().info(info)
     }

@@ -4,9 +4,11 @@ import io.notbronken.sgtccapi.common.model.CreatedResourceWithId
 import io.notbronken.sgtccapi.common.model.DeletedResource
 import io.notbronken.sgtccapi.students.api.dto.CreateDto
 import io.notbronken.sgtccapi.students.api.dto.ListDto
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 
 interface StudentService {
-    suspend fun create(dto: CreateDto): CreatedResourceWithId
-    suspend fun delete(): DeletedResource
-    suspend fun list(): List<ListDto>
+    fun create(dto: CreateDto): Mono<CreatedResourceWithId>
+    fun delete(): Mono<DeletedResource>
+    fun list(): Flux<List<ListDto>>
 }
