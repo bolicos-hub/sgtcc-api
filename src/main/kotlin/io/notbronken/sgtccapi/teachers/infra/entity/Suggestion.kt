@@ -1,6 +1,9 @@
 package io.notbronken.sgtccapi.teachers.infra.entity
 
+import io.notbronken.sgtccapi.teachers.api.dto.SuggestionDto
+import io.notbronken.sgtccapi.teachers.api.dto.SuggestionUpdateDto
 import io.notbronken.sgtccapi.teachers.infra.enumeration.SuggestionStatus
+import java.time.ZonedDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -12,7 +15,6 @@ import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.SequenceGenerator
 import javax.persistence.Table
-import java.time.ZonedDateTime
 
 @Entity
 @Table(name = "SUGGESTIONS")
@@ -23,20 +25,43 @@ class Suggestion(
     @Column(nullable = false, unique = true)
     val id: Long? = null,
     @Column(nullable = false, length = 200)
-    val title: String,
+    var title: String,
     @Column(nullable = false)
-    val description: String,
+    var description: String,
     @Column(nullable = false)
-    val search: Boolean,
+    var search: Boolean,
     @Column
-    val project: String,
+    var project: String,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val status: SuggestionStatus,
+    var status: SuggestionStatus = SuggestionStatus.FREE,
     @Column(name = "CREATED_AT", nullable = false)
     val createdAt: ZonedDateTime = ZonedDateTime.now(),
     @ManyToOne
     @JoinColumn(name = "FK_TEACHER_PK", nullable = false)
-    val teacher: Teacher,
+    var teacher: Teacher? = null,
 ) {
+    fun toDto() = SuggestionDto(
+        id = id!!,
+        title = title,
+        description = description,
+        search = search,
+        project = project,
+        status = status,
+        createdAt = createdAt,
+        teacherId = teacher!!.registration
+    )
+
+    fun update(dto: SuggestionUpdateDto): Suggestion {
+        title = dto.title
+        description = dto.description
+        search = dto.search
+        project = dto.project
+        status = dto.status
+
+        return this
+    }
+    fun addTeacher(entity: Teacher) {
+        teacher = entity
+    }
 }

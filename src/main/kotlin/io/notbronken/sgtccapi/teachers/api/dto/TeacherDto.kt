@@ -1,44 +1,45 @@
-package io.notbronken.sgtccapi.students.api.dto
+package io.notbronken.sgtccapi.teachers.api.dto
 
-import io.notbronken.sgtccapi.students.infra.entity.Student
-import io.notbronken.sgtccapi.students.infra.enumeration.StudentStatus
+import io.notbronken.sgtccapi.teachers.infra.entity.Teacher
 import java.time.ZonedDateTime
 
-data class StudentCreateDto(
+data class TeacherCreateDto(
     val registration: String,
     val name: String,
     val email: String,
     val phone: String,
+    val lattes: String,
 ) {
-    fun toEntity() = Student(
-        registration = registration,
-        name = name,
-        email = email,
-        phone = phone
-    )
-}
-
-data class StudentUpdateDto(
-    val name: String,
-    val email: String,
-    val phone: String,
-    val status: StudentStatus,
-)
-
-data class StudentDto(
-    val registration: String,
-    val name: String,
-    val email: String,
-    val phone: String,
-    val status: StudentStatus,
-    val createdAt: ZonedDateTime,
-) {
-    fun toEntity() = Student(
+    fun toEntity() = Teacher(
         registration = registration,
         name = name,
         email = email,
         phone = phone,
-        status = status,
+        lattes = lattes
+    )
+}
+
+data class TeacherUpdateDto(
+    val name: String,
+    val email: String,
+    val phone: String,
+    val lattes: String,
+)
+
+data class TeacherDto(
+    val registration: String,
+    val name: String,
+    val email: String,
+    val phone: String,
+    val lattes: String,
+    val createdAt: ZonedDateTime,
+) {
+    fun toEntity() = Teacher(
+        registration = registration,
+        name = name,
+        email = email,
+        phone = phone,
+        lattes = lattes,
         createdAt = createdAt,
     )
 }

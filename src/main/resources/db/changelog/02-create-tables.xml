@@ -13,7 +13,6 @@
             <column name="name" type="VARCHAR(50)" />
             <column name="email" type="VARCHAR(50)" />
             <column name="phone" type="VARCHAR(11)" />
-            <column name="cpf" type="VARCHAR(11)" />
             <column name="lattes" type="VARCHAR(50)" />
             <column name="CREATED_AT" type="java.sql.Types.TIMESTAMP_WITH_TIMEZONE" />
         </createTable>
@@ -22,7 +21,6 @@
             <column name="name" type="VARCHAR(50)" />
             <column name="email" type="VARCHAR(50)" />
             <column name="phone" type="VARCHAR(11)" />
-            <column name="cpf" type="VARCHAR(11)" />
             <column name="CREATED_AT" type="java.sql.Types.TIMESTAMP_WITH_TIMEZONE" />
             <column name="status" type="VARCHAR(255)" />
         </createTable>
@@ -96,7 +94,6 @@
             <column name="FK_CLASS_PK" type="bigint" />
             <column name="FK_STUDENT_PK" type="VARCHAR(20)" />
             <column name="note" type="DOUBLE PRECISION(2,4)" />
-            <column name="FK_PROPOSAL_PK" type="bigint" />
         </createTable>
         <createTable tableName="TEACHERS_BOARDS">
             <column name="FK_TEACHER_PK" type="VARCHAR(20)" />

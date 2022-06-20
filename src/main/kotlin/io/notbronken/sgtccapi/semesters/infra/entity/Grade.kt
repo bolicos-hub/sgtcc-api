@@ -1,7 +1,10 @@
 package io.notbronken.sgtccapi.semesters.infra.entity
 
-import io.notbronken.sgtccapi.proposals.infra.entity.Proposal
+import io.notbronken.sgtccapi.common.annotation.NoArgCompositeId
+import io.notbronken.sgtccapi.semesters.api.dto.GradeDto
 import io.notbronken.sgtccapi.students.infra.entity.Student
+import java.io.Serializable
+import java.util.Objects
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -9,7 +12,6 @@ import javax.persistence.IdClass
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.Table
-import java.io.Serializable
 import io.notbronken.sgtccapi.semesters.infra.entity.Class as Group
 
 @Entity
@@ -24,30 +26,49 @@ class Grade(
     @ManyToOne
     @JoinColumn(name = "FK_CLASS_PK", nullable = false)
     val group: Group,
-    @Column(nullable = false, scale = 2, precision = 4)
-    val note: Double,
-    @ManyToOne
-    @JoinColumn(name = "FK_PROPOSAL_PK", nullable = false)
-    val proposal: Proposal,
+    @Column(scale = 2, precision = 4)
+    var note: Double? = null,
 ) {
+    fun toDto() = GradeDto(
+        registration = student.registration,
+        name = student.name,
+        email = student.email,
+        phone = student.phone,
+        status = student.status,
+        createdAt = student.createdAt,
+        note = note,
+    )
+
+    fun addNote(notes: Double) {
+        note = notes
+    }
+
     override fun equals(other: Any?): Boolean =
         other is Grade
             && other.student.registration == student.registration
             && other.group.id == group.id
-            && other.proposal.id == proposal.id
 
-    override fun hashCode(): Int =
-        student.registration.hashCode() + group.id.hashCode() + proposal.id.hashCode()
+    override fun hashCode(): Int {
+        val studentHashCode = Objects.hashCode(student.registration)
+        val groupHashCode = Objects.hashCode(group.id)
+        return Objects.hash(studentHashCode, groupHashCode)
+    }
 }
 
+@NoArgCompositeId
 class GradeCompositeId(
-    private val student: Student,
-    private val group: Group,
+    val student: String? = null,
+    val group: Long? = null,
 ): Serializable {
     override fun equals(other: Any?): Boolean =
         other is Grade
-                && other.student.registration == student.registration
-                && other.group.id == group.id
+                && other.student.registration == student
+                && other.group.id == group
 
-    override fun hashCode(): Int = student.registration.hashCode() + group.id.hashCode()
+
+    override fun hashCode(): Int {
+        val studentHashCode = Objects.hashCode(student)
+        val groupHashCode = Objects.hashCode(group)
+        return Objects.hash(studentHashCode, groupHashCode)
+    }
 }

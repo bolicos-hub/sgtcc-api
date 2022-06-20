@@ -1,5 +1,6 @@
 package io.notbronken.sgtccapi.config
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -26,6 +27,9 @@ class WebFluxConfiguration : WebFluxConfigurer {
         const val nullIsSameAsDefault = true
         const val singletonSupport = false
         const val strictNullChecks = false
+        const val writeDatesAsTimesTamp = false
+        const val writeDateTimesTampAsNanoseconds = false
+        const val failOnUnknownProperties = false
     }
 
     override fun configureHttpMessageCodecs(configurer: ServerCodecConfigurer) {
@@ -40,7 +44,9 @@ class WebFluxConfiguration : WebFluxConfigurer {
         val mapper = ObjectMapper()
             .registerModule(JavaTimeModule())
             .registerModule(module)
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, writeDatesAsTimesTamp)
+            .configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, writeDateTimesTampAsNanoseconds)
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, failOnUnknownProperties)
 
         val decoder = Jackson2JsonDecoder(mapper)
         val encoder = Jackson2JsonEncoder(mapper)

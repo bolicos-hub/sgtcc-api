@@ -71,6 +71,7 @@ dependencies {
 
 noArg {
 	annotation("jakarta.persistence.Entity")
+	annotation("io.notbronken.sgtccapi.common.annotation.NoArgCompositeId")
 }
 
 tasks.withType<KotlinCompile> {

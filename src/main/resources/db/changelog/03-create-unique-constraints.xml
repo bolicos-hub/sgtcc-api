@@ -7,8 +7,8 @@
     "
 >
 <changeSet author="analuciabolico" id="03-create-unique-constraints">
-    <addUniqueConstraint tableName="TEACHERS" columnNames="registration,email,phone,cpf" />
-    <addUniqueConstraint tableName="STUDENTS" columnNames="registration,email,phone,cpf" />
+    <addUniqueConstraint tableName="TEACHERS" columnNames="registration,email,phone" />
+    <addUniqueConstraint tableName="STUDENTS" columnNames="registration,email,phone" />
     <addUniqueConstraint tableName="SEMESTERS" columnNames="id" />
     <addUniqueConstraint tableName="CLASSES" columnNames="id" />
     <addUniqueConstraint tableName="SUGGESTIONS" columnNames="id" />

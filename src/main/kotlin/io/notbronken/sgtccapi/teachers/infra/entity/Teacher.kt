@@ -3,6 +3,8 @@ package io.notbronken.sgtccapi.teachers.infra.entity
 import io.notbronken.sgtccapi.boards.infra.entity.Board
 import io.notbronken.sgtccapi.proposals.infra.entity.Examination
 import io.notbronken.sgtccapi.proposals.infra.entity.Proposal
+import io.notbronken.sgtccapi.teachers.api.dto.TeacherDto
+import io.notbronken.sgtccapi.teachers.api.dto.TeacherUpdateDto
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -19,17 +21,15 @@ import io.notbronken.sgtccapi.semesters.infra.entity.Class as Group
 class Teacher (
     @Id
     @Column(nullable = false, length = 20, unique = true)
-    val registration: String,
+    var registration: String,
     @Column(nullable = false, length = 50)
-    val name: String,
+    var name: String,
     @Column(nullable = false, length = 50, unique = true)
-    val email: String,
+    var email: String,
     @Column(nullable = false, length = 11, unique = true)
-    val phone: String,
-    @Column(nullable = false, length = 11, unique = true)
-    val cpf: String,
+    var phone: String,
     @Column(nullable = false, length = 50)
-    val lattes: String,
+    var lattes: String,
     @Column(name = "CREATED_AT", nullable = false)
     val createdAt: ZonedDateTime = ZonedDateTime.now(),
     @OneToMany(mappedBy = "teacher")
@@ -55,5 +55,21 @@ class Teacher (
     @OneToMany(mappedBy = "teacher")
     val suggestions: Set<Suggestion> = setOf(),
 ) {
+    fun toDto() = TeacherDto(
+        registration = registration,
+        name = name,
+        email = email,
+        phone = phone,
+        lattes = lattes,
+        createdAt = createdAt,
+    )
 
+    fun update(dto: TeacherUpdateDto): Teacher {
+        name = dto.name
+        email = dto.email
+        phone = dto.phone
+        lattes = dto.lattes
+
+        return this
+    }
 }

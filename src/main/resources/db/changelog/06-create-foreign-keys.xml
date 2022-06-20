@@ -64,11 +64,6 @@
              referencedTableName="STUDENTS"
              referencedColumnNames="registration"
     />
-    <addForeignKeyConstraint baseTableName="CLASSES_STUDENTS" baseColumnNames="FK_PROPOSAL_PK"
-             constraintName="FK_CLASSES_STUDENTS_CONSTRAINT_PK_PROPOSALS"
-             referencedTableName="PROPOSALS"
-             referencedColumnNames="id"
-    />
     <addForeignKeyConstraint baseTableName="TEACHERS_BOARDS" baseColumnNames="FK_TEACHER_PK"
              constraintName="FK_TEACHERS_BOARDS_CONSTRAINT_PK_TEACHERS"
              referencedTableName="TEACHERS"

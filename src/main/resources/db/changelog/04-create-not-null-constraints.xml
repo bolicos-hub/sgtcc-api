@@ -12,7 +12,6 @@
     <addNotNullConstraint tableName="TEACHERS" columnName="name" />
     <addNotNullConstraint tableName="TEACHERS" columnName="email" />
     <addNotNullConstraint tableName="TEACHERS" columnName="phone" />
-    <addNotNullConstraint tableName="TEACHERS" columnName="cpf" />
     <addNotNullConstraint tableName="TEACHERS" columnName="lattes" />
     <addNotNullConstraint tableName="TEACHERS" columnName="CREATED_AT" />
 
@@ -20,7 +19,6 @@
     <addNotNullConstraint tableName="STUDENTS" columnName="name" />
     <addNotNullConstraint tableName="STUDENTS" columnName="email" />
     <addNotNullConstraint tableName="STUDENTS" columnName="phone" />
-    <addNotNullConstraint tableName="STUDENTS" columnName="cpf" />
     <addNotNullConstraint tableName="STUDENTS" columnName="status" />
     <addNotNullConstraint tableName="STUDENTS" columnName="CREATED_AT" />
 
@@ -82,8 +80,6 @@
     <!--    Associative Tables-->
     <addNotNullConstraint tableName="CLASSES_STUDENTS" columnName="FK_CLASS_PK"/>
     <addNotNullConstraint tableName="CLASSES_STUDENTS" columnName="FK_STUDENT_PK"/>
-    <addNotNullConstraint tableName="CLASSES_STUDENTS" columnName="note"/>
-    <addNotNullConstraint tableName="CLASSES_STUDENTS" columnName="FK_PROPOSAL_PK"/>
 
     <addNotNullConstraint tableName="TEACHERS_BOARDS" columnName="FK_TEACHER_PK"/>
     <addNotNullConstraint tableName="TEACHERS_BOARDS" columnName="FK_BOARD_PK"/>

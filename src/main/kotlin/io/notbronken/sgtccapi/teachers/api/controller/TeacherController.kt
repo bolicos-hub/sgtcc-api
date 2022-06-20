@@ -1,10 +1,10 @@
-package io.notbronken.sgtccapi.semesters.api.controller
+package io.notbronken.sgtccapi.teachers.api.controller
 
-import io.notbronken.sgtccapi.common.model.CreatedResource
-import io.notbronken.sgtccapi.semesters.api.dto.SemesterCreateDto
-import io.notbronken.sgtccapi.semesters.api.dto.SemesterDto
-import io.notbronken.sgtccapi.semesters.api.dto.SemesterUpdateDto
-import io.notbronken.sgtccapi.semesters.business.service.SemesterService
+import io.notbronken.sgtccapi.common.model.CreatedResourceWithId
+import io.notbronken.sgtccapi.teachers.api.dto.TeacherCreateDto
+import io.notbronken.sgtccapi.teachers.api.dto.TeacherDto
+import io.notbronken.sgtccapi.teachers.api.dto.TeacherUpdateDto
+import io.notbronken.sgtccapi.teachers.business.service.TeacherService
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,12 +20,12 @@ import reactor.core.publisher.Mono
 import java.util.logging.Logger
 
 @RestController
-@RequestMapping("/api/semesters")
-class SemesterController(
-    val semesterService: SemesterService,
+@RequestMapping("/api/teachers")
+class TeacherController(
+    val teacherService: TeacherService,
 ) {
     companion object {
-        private val LOGGER = Logger.getLogger(SemesterController::class.simpleName)
+        private val LOGGER = Logger.getLogger(TeacherController::class.simpleName)
     }
 
     @PostMapping(
@@ -33,7 +33,7 @@ class SemesterController(
         produces = [MediaType.APPLICATION_JSON_VALUE],
     )
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody dto: SemesterCreateDto): Mono<CreatedResource> = semesterService.create(dto)
+    fun create(@RequestBody dto: TeacherCreateDto): Mono<CreatedResourceWithId> = teacherService.create(dto)
 
     @PutMapping(
         value = ["/{id}"],
@@ -42,17 +42,17 @@ class SemesterController(
     )
     @ResponseStatus(HttpStatus.OK)
     fun update(
-        @RequestBody dto: SemesterUpdateDto, @PathVariable id: Long
-    ): Mono<SemesterDto> = semesterService.update(dto, id)
+        @RequestBody dto: TeacherUpdateDto, @PathVariable id: String
+    ): Mono<TeacherDto> = teacherService.update(dto, id)
 
     @GetMapping(
         value = ["/{id}"],
         produces = [MediaType.APPLICATION_JSON_VALUE],
     )
     @ResponseStatus(HttpStatus.OK)
-    fun findById(@PathVariable id: Long): Mono<SemesterDto> = semesterService.read(id)
+    fun findById(@PathVariable id: String): Mono<TeacherDto> = teacherService.read(id)
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    fun findAll(): Flux<SemesterDto> = semesterService.list()
+    fun findAll(): Flux<TeacherDto> = teacherService.list()
 }

@@ -1,5 +1,7 @@
 package io.notbronken.sgtccapi.semesters.infra.entity
 
+import io.notbronken.sgtccapi.semesters.api.dto.SemesterDto
+import io.notbronken.sgtccapi.semesters.api.dto.SemesterUpdateDto
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -20,10 +22,22 @@ class Semester(
     @Column(nullable = false, unique = true)
     val id: Long? = null,
     @Column(nullable = false, length = 50)
-    val name: String,
+    var name: String,
     @OneToMany(mappedBy = "semester")
-    val classes: Set<Group> = setOf(),
+    var classes: Set<Group> = setOf(),
     @Column(name = "CREATED_AT", nullable = false)
     val createdAt: ZonedDateTime = ZonedDateTime.now(),
 ) {
+    fun toDto() = SemesterDto(
+        id = id!!,
+        name = name,
+        createdAt = createdAt,
+    )
+
+    fun update(dto: SemesterUpdateDto): Semester {
+        name = dto.name
+//        classes = dto.classes.map { Group() }
+
+        return this
+    }
 }

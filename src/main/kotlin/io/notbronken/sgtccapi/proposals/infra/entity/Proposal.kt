@@ -2,9 +2,9 @@ package io.notbronken.sgtccapi.proposals.infra.entity
 
 import io.notbronken.sgtccapi.boards.infra.entity.Board
 import io.notbronken.sgtccapi.proposals.infra.enumeration.ProposalStatus
-import io.notbronken.sgtccapi.semesters.infra.entity.Grade
 import io.notbronken.sgtccapi.students.infra.entity.Student
 import io.notbronken.sgtccapi.teachers.infra.entity.Teacher
+import java.time.ZonedDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -18,7 +18,6 @@ import javax.persistence.OneToMany
 import javax.persistence.OneToOne
 import javax.persistence.SequenceGenerator
 import javax.persistence.Table
-import java.time.ZonedDateTime
 
 @Entity
 @Table(name = "PROPOSALS")
@@ -49,7 +48,5 @@ class Proposal(
     val examinations: Set<Examination> = setOf(),
     @OneToOne(mappedBy = "proposal")
     val board: Board,
-    @OneToMany(mappedBy = "proposal")
-    val classes: Set<Grade> = setOf(),
 ) {
 }
