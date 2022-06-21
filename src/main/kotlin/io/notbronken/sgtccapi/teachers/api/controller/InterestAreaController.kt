@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono
 import java.util.logging.Logger
 
 @RestController
-@RequestMapping("/api/suggestions")
+@RequestMapping("/api/interest-areas")
 class InterestAreaController(
     val interestAreaService: InterestAreaService,
 ) {

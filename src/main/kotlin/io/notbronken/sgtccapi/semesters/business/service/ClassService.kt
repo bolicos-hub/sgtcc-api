@@ -93,7 +93,7 @@ class ClassServiceImpl(
     }
 
     override fun listBySemester(semesterId: Long): Flux<ClassDto> {
-        val list = runBlocking { classRepository.findAllBySemester_Id(semesterId) }
+        val list = runBlocking { classRepository.findAllBySemester_IdOrderById(semesterId) }
 
         LOGGER.info(LIST_MESSAGE)
 

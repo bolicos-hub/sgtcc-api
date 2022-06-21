@@ -48,10 +48,16 @@ class InterestAreaServiceImpl(
     }
 
     override fun update(dto: InterestAreaUpdateDto, id: Long): Mono<InterestAreaDto> {
-        val teachers = runBlocking { teacherService.list() }
+        val teachers = teacherService
+            .list()
+            .collectList()
+            .block()!!
+            .map { it.toEntity() }
+            .filter { dto.teachers.contains(it.registration) }
+            .toSet()
         val entity = runBlocking { interestAreaRepository.findById(id) }
             .orElseThrow { BusinessEntityNotFoundException("$ENTITY_NOT_FOUND_MESSAGE $id") }
-            .update(dto)
+            .update(dto, teachers)
         val response = runBlocking { interestAreaRepository.save(entity) }
 
         LOGGER.info("$UPDATE_MESSAGE $response")
@@ -87,12 +93,6 @@ class InterestAreaServiceImpl(
     }
 
     override fun listByTeacher(teacherId: String): Flux<InterestAreaDto> {
-        val teacher = teacherService.read(teacherId).block()!!.toEntity()
-        val list = runBlocking {
-            interestAreaRepository
-                .findAllByTeacher_Registration(teacher.registration)
-                .map { it.toDto() }
-        }.stream()
-        return Flux.fromStream(list)
+        TODO("Not yet implemented")
     }
 }
