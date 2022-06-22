@@ -5,6 +5,7 @@ import io.notbronken.sgtccapi.teachers.api.dto.InterestAreaUpdateDto
 import java.time.ZonedDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
@@ -26,7 +27,7 @@ class InterestArea(
     var description: String,
     @Column(name = "CREATED_AT", nullable = false)
     val createdAt: ZonedDateTime = ZonedDateTime.now(),
-    @ManyToMany(mappedBy = "interestAreas")
+    @ManyToMany(mappedBy = "interestAreas", fetch = FetchType.EAGER)
     var teachers: Set<Teacher> = setOf(),
 ) {
     fun toDto() = InterestAreaDto(

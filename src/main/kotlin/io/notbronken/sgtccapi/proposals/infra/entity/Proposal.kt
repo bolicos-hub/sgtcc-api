@@ -33,7 +33,7 @@ class Proposal(
     val description: String,
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val status: ProposalStatus,
+    val status: ProposalStatus = ProposalStatus.CREATED,
     @Column(name = "CREATED_AT", nullable = false)
     val createdAt: ZonedDateTime = ZonedDateTime.now(),
     @ManyToOne
@@ -47,6 +47,6 @@ class Proposal(
     @OneToMany(mappedBy = "proposal")
     val examinations: Set<Examination> = setOf(),
     @OneToOne(mappedBy = "proposal")
-    val board: Board,
+    val board: Board? = null,
 ) {
 }

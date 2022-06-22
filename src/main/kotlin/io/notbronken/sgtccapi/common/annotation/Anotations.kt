@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus
 @Retention(AnnotationRetention.SOURCE)
 annotation class NoArgCompositeId
 
-@RequestMapping(
-    consumes = [MediaType.APPLICATION_JSON_VALUE],
-    produces = [MediaType.APPLICATION_JSON_VALUE],
-    method = [RequestMethod.GET]
-)
-@ResponseStatus(code = HttpStatus.CREATED)
+@RequestMapping
+@ResponseStatus
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class MappingJson(
@@ -43,7 +39,7 @@ annotation class MappingJson(
      * Alias for [RequestMapping.method].
      */
     @get:AliasFor(annotation = RequestMapping::class)
-    val method: Array<RequestMethod> = [],
+    val method: Array<RequestMethod> = [RequestMethod.GET],
 
     /**
      * Alias for [RequestMapping.params].
@@ -58,8 +54,20 @@ annotation class MappingJson(
     val headers: Array<String> = [],
 
     /**
+     * Alias for [RequestMapping.consumes].
+     */
+    @get:AliasFor(annotation = RequestMapping::class)
+    val consumes: Array<String> = [MediaType.APPLICATION_JSON_VALUE],
+
+    /**
+     * Alias for [RequestMapping.produces].
+     */
+    @get:AliasFor(annotation = RequestMapping::class)
+    val produces: Array<String> = [MediaType.APPLICATION_JSON_VALUE],
+
+    /**
      * Alias for [ResponseStatus.code].
      */
     @get:AliasFor(annotation = ResponseStatus::class)
-    val code: HttpStatus = HttpStatus.CREATED,
+    val code: HttpStatus = HttpStatus.OK,
 )
