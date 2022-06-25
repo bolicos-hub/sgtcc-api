@@ -14,7 +14,6 @@ class SecurityConfiguration {
     fun springSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain? {
         http
             .csrf { it.disable() }
-            .cors { it.disable() }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }
             .logout { it.disable() }

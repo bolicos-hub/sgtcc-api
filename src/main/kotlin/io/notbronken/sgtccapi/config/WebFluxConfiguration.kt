@@ -13,6 +13,7 @@ import org.springframework.http.codec.json.Jackson2JsonDecoder
 import org.springframework.http.codec.json.Jackson2JsonEncoder
 import org.springframework.http.server.reactive.ServerHttpRequest
 import org.springframework.stereotype.Component
+import org.springframework.web.reactive.config.CorsRegistry
 import org.springframework.web.reactive.config.WebFluxConfigurer
 import org.springframework.web.server.ServerWebExchange
 import org.springframework.web.server.WebFilter
@@ -53,6 +54,12 @@ class WebFluxConfiguration : WebFluxConfigurer {
 
         configurer.defaultCodecs().jackson2JsonDecoder(decoder)
         configurer.defaultCodecs().jackson2JsonEncoder(encoder)
+    }
+
+    override fun addCorsMappings(registry: CorsRegistry) {
+        registry
+            .addMapping("/**")
+            .allowedMethods("*");
     }
 }
 
