@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface SuggestionRepository: JpaRepository<Suggestion, Long> {
     fun findAllByTeacher_Registration(registration: String): List<Suggestion>
+    fun findAllByOrderByCreatedAtDesc(): List<Suggestion>
 }

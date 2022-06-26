@@ -78,7 +78,7 @@ class SuggestionServiceImpl(
     }
 
     override fun list(): Flux<SuggestionDto> {
-        val list = runBlocking { suggestionRepository.findAll() }
+        val list = runBlocking { suggestionRepository.findAllByOrderByCreatedAtDesc() }
 
         LOGGER.info(LIST_MESSAGE)
 

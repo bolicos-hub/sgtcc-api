@@ -72,7 +72,7 @@ class TeacherServiceImpl(
     }
 
     override fun list(): Flux<TeacherDto> {
-        val list = runBlocking { teacherRepository.findAll() }
+        val list = runBlocking { teacherRepository.findAllByOrderByCreatedAtDesc() }
 
         LOGGER.info(LIST_MESSAGE)
 

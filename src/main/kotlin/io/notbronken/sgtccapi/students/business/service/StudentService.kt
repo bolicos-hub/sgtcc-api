@@ -74,7 +74,7 @@ class StudentServiceImpl(
     }
 
     override fun list(): Flux<StudentDto> {
-        val list = runBlocking { studentRepository.findAll() }
+        val list = runBlocking { studentRepository.findAllByOrderByCreatedAtDesc() }
 
         LOGGER.info(LIST_MESSAGE)
 

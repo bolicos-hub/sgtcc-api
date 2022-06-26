@@ -5,4 +5,5 @@ import io.notbronken.sgtccapi.semesters.infra.entity.Class as Group
 
 interface ClassRepository: JpaRepository<Group, Long> {
     fun findAllBySemester_IdOrderById(semesterId: Long): List<Group>
+    fun findAllByOrderByCreatedAtDesc(): List<Group>
 }

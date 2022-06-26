@@ -84,7 +84,7 @@ class InterestAreaServiceImpl(
     }
 
     override fun list(): Flux<InterestAreaDto> {
-        val list = runBlocking { interestAreaRepository.findAll() }
+        val list = runBlocking { interestAreaRepository.findAllByOrderByCreatedAtDesc() }
 
         LOGGER.info(LIST_MESSAGE)
 
