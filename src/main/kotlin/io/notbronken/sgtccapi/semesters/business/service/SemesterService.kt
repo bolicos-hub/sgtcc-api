@@ -77,8 +77,11 @@ class SemesterServiceImpl(
 
         LOGGER.info(LIST_MESSAGE)
 
-        val converted = list.map(Semester::toDto).stream()
+        val converted = list
+            .map(Semester::toDto)
+            .stream()
+            .sorted(Comparator.comparing(SemesterDto::createdAt))
+
         return Flux.fromStream(converted)
     }
-
 }
