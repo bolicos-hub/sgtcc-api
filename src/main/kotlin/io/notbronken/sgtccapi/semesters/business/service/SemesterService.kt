@@ -73,14 +73,13 @@ class SemesterServiceImpl(
     }
 
     override fun list(): Flux<SemesterDto> {
-        val list = runBlocking { semesterRepository.findAll() }
+        val list = runBlocking { semesterRepository.findAllByOrderByCreatedAtDesc() }
 
         LOGGER.info(LIST_MESSAGE)
 
         val converted = list
             .map(Semester::toDto)
             .stream()
-            .sorted(Comparator.comparing(SemesterDto::createdAt))
 
         return Flux.fromStream(converted)
     }
