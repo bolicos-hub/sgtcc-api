@@ -42,6 +42,7 @@ class Class (
         name = name,
         semester = semester.toDto(),
         teacherId = teacher.registration,
+        teacherName = teacher.name,
         students = students.map(Grade::toDto),
         createdAt = createdAt,
     )

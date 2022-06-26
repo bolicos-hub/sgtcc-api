@@ -37,6 +37,7 @@ data class ClassDto(
     val name: String,
     val semester: SemesterDto,
     val teacherId: String,
+    val teacherName: String,
     val students: List<GradeDto>,
     val createdAt: ZonedDateTime,
 ) {
