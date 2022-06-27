@@ -29,6 +29,8 @@ class GradeServiceImpl(
         private const val READ_MESSAGE = "Grade read with unique identifier:"
         private const val LIST_MESSAGE = "Grades retrieved from the database"
         private const val ENTITY_NOT_FOUND_MESSAGE = "Grade with unique identifier not found:"
+        private const val NONE_STUDENTS_MESSAGE = "None students was finding with this uniques identifiers:"
+        private const val LINKED_MESSAGE = "students were linked to class:"
     }
 
     override fun read(id: GradeCompositeId): Grade {
@@ -58,8 +60,9 @@ class GradeServiceImpl(
         val grades = gradeIds.filter { !entity.students.contains(it) }
         val gradesSaved = runBlocking { gradeRepository.saveAll(grades).toSet() }
 
-        val idMessageError = gradesSaved.map { "Student: ${it.student} and Class: ${it.group}" }
-        LOGGER.info("$CREATE_MESSAGE $idMessageError")
+        if (gradesSaved.isEmpty()) LOGGER.info("$NONE_STUDENTS_MESSAGE $studentIds")
+        else gradesSaved.forEach { LOGGER.info("Add Student: '${it.student.registration} - ${it.student.name}' into Class: '${it.group.id} - ${it.group.name}'") }
+        LOGGER.info("${gradesSaved.size} $LINKED_MESSAGE '${entity.id} - ${entity.name}'")
 
         return gradesSaved
     }

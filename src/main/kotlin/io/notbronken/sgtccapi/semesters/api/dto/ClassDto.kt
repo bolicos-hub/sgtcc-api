@@ -11,17 +11,23 @@ data class ClassCreateDto(
     val name: String,
     val semesterId: Long,
     val teacherId: String,
+    val students: List<String>,
 ) {
     fun toEntity(semester: Semester, teacher: Teacher) = Group(
         name = name,
         semester = semester,
         teacher = teacher,
     )
+    fun toUpdate() = ClassUpdateDto(
+        name = name,
+        teacherId = teacherId,
+        students = students,
+    )
+
 }
 
 data class ClassUpdateDto(
     val name: String,
-    val semesterId: Long,
     val teacherId: String,
     val students: List<String>,
 ) {

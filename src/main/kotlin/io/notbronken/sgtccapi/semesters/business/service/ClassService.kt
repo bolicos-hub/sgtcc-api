@@ -47,6 +47,8 @@ class ClassServiceImpl(
         val semester = runBlocking { semesterService.read(dto.semesterId).block()!!.toEntity() }
         val entity = dto.toEntity(semester, teacher)
         val response = runBlocking { classRepository.save(entity) }
+        val grades = gradeService.addStudents(response, dto.students)
+        response.update(dto.toUpdate(), grades, entity.semester)
 
         LOGGER.info("$CREATE_MESSAGE ${response.id}")
 
@@ -57,9 +59,8 @@ class ClassServiceImpl(
     override fun update(dto: ClassUpdateDto, id: Long): Mono<ClassDto> {
         val entity = runBlocking { classRepository.findById(id) }
             .orElseThrow { BusinessEntityNotFoundException("$ENTITY_NOT_FOUND_MESSAGE $id") }
-        val semester = runBlocking { semesterService.read(dto.semesterId).block()!!.toEntity() }
         val grades = gradeService.addStudents(entity, dto.students)
-        entity.update(dto, grades, semester)
+        entity.update(dto, grades, entity.semester)
         val response = runBlocking { classRepository.save(entity) }
 
         LOGGER.info("$UPDATE_MESSAGE ${response.id}")
@@ -112,7 +113,6 @@ class ClassServiceImpl(
         val updated = entity.toDto()
         return Mono.just(updated)
     }
-
 
     override fun addNote(id: Long, studentId: String, note: Double): Mono<ClassDto> {
         val entity = runBlocking { classRepository.findById(id) }
